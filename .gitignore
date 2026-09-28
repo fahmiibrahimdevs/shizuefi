@@ -1,5 +1,12 @@
-# Numerous always-ignore extensions
-*.txt
+# Dependencies
+/node_modules/
+
+# Tailwind CSS standalone binary (large, >100MB — download separately)
+/tailwindcss-linux-x64
+/tailwindcss-*
+
+# Build artifacts
+/dist/
 *.log
 *.zip
 *.rar
@@ -7,31 +14,15 @@
 *.err
 *.orig
 *.rej
-*.swo
-*.swp
-*.vi
-*~
 
-# Folders to ignore
-/node_modules/
-/dist/node_modules/
-/pages/layouts/
-
-# OS or Editor folders
-._*
-.cache
+# OS / Editor
 .DS_Store
-.idea
-.vscode
-.project
-.settings
-.tmproj
-*.esproj
-*.sublime-project
-*.sublime-workspace
-nbproject
 Thumbs.db
-
-# Komodo
-.komodotools
-*.komodoproject
+.idea/
+.vscode/
+.project
+.settings/
+*.swp
+*.swo
+*~
+._*

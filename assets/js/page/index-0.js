@@ -9,15 +9,16 @@ var myChart = new Chart(statistics_chart, {
     datasets: [{
       label: 'Statistics',
       data: [640, 387, 530, 302, 430, 270, 488],
-      borderWidth: 5,
+      borderWidth: 2,
       borderColor: '#6777ef',
       backgroundColor: 'transparent',
       pointBackgroundColor: '#fff',
       pointBorderColor: '#6777ef',
-      pointRadius: 4
+      pointRadius: 2
     }]
   },
   options: {
+    maintainAspectRatio: false,
     legend: {
       display: false
     },
