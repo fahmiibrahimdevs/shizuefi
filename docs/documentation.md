@@ -163,6 +163,18 @@ On mobile (< 768px), all Bootstrap modals should look like Flutter's `showModalB
 
 **Verification:** Headless Chrome (500px-wide viewport, `< 768px`): `.modal-dialog` computes `position: absolute`, `rect.bottom === innerHeight` (pinned to bottom), `.modal-content` top radius `16px` / bottom `0`, `max-height 90vh`; `::before` handle `40x4px` `rgb(156,163,175)`; static `.modal-dialog` preview stays `position: relative`. Synthetic `PointerEvent` drag on `.modal-header`: a 30px pull updates `style.translate` then snaps back to `""` with modal still shown; a 300px pull dismisses (`stillShown=false`). Desktop (1200px): unchanged (relative dialog, `max-width 500px`, radius `4.8px`, no handle; drag disabled). `node audit-classes.js`: `USED in HTML & MISSING: 0`.
 
+### Issue 12: Section-Header Breadcrumb Wraps to Two Lines (User Design Fix)
+**The Bug (Sept 28, 2026):**
+On narrow screens the section-header breadcrumb (`.section-header-breadcrumb`, used on 68 pages) grew taller because **each `.breadcrumb-item` shrank and its own text wrapped to a second line** (item `offsetHeight` 36px vs 18px on desktop). The container was already `flex-wrap: nowrap`, so the wrap was *inside* each item, not between items.
+
+**The Fix (in `assets/css/style-tailwind.css`, section 4.2):**
+- `.section-header-breadcrumb` → `min-width: 0; flex-wrap: nowrap` (the `min-width: 0` matters: it lets the container shrink as a flex child of `.section-header` instead of overflowing).
+- `.section-header-breadcrumb .breadcrumb-item` → `min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap` so a long item ellipsizes instead of wrapping.
+- `.breadcrumb-item:first-child` and `:last-child` → `flex: none`, so the home item and the **current page (last item)** stay fully visible; only the middle items get ellipsized.
+- Recompiled `assets/css/style-tailwind.compiled.css`. (The general Bootstrap `.breadcrumb` demo on `pages/bootstrap-breadcrumb.html` is intentionally left as-is.)
+
+**Verification (headless Chrome, harness with 4 items incl. a long label):** at 500px the breadcrumb is a single 18px line with `scrollWidth === clientWidth` (no overflow); first item `62px` and last item `236px` unchanged, middle item truncated (`152px → 76px`). At 1200px all items keep their full widths. `node audit-classes.js`: `USED in HTML & MISSING: 0`.
+
 ## 5. Guide for Future AI / Development
 - **Do not edit `.compiled.css` files directly.** They will be overwritten.
 - **Edit the intermediate files** (`style-tailwind.css`, `components-tailwind.css`) or the generator scripts (`generate-*.js`).

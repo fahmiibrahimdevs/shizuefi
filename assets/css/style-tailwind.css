@@ -1766,9 +1766,19 @@ pre {
 }
 .section .section-header .section-header-breadcrumb {
   @apply ml-auto flex items-center;
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 .section .section-header .section-header-breadcrumb .breadcrumb-item {
   @apply text-[12px];
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.section .section-header .section-header-breadcrumb .breadcrumb-item:first-child,
+.section .section-header .section-header-breadcrumb .breadcrumb-item:last-child {
+  flex: none;
 }
 .section .section-header .btn {
   @apply text-[12px];

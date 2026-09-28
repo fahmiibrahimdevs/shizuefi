@@ -887,6 +887,9 @@
   .flex-initial {
     flex: 0 auto;
   }
+  .shrink {
+    flex-shrink: 1;
+  }
   .shrink-0 {
     flex-shrink: 0;
   }
@@ -4318,9 +4321,18 @@ pre {
   margin-left: auto;
   display: flex;
   align-items: center;
+  min-width: 0;
+  flex-wrap: nowrap;
 }
 .section .section-header .section-header-breadcrumb .breadcrumb-item {
   font-size: 12px;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.section .section-header .section-header-breadcrumb .breadcrumb-item:first-child, .section .section-header .section-header-breadcrumb .breadcrumb-item:last-child {
+  flex: none;
 }
 .section .section-header .btn {
   font-size: 12px;
