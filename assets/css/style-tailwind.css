@@ -571,6 +571,59 @@ table tr:hover .table-links {
   @apply hidden;
 }
 
+/* 3.8b Bottom sheet modal (mobile < 768px) — Flutter showModalBottomSheet style */
+@media (max-width: 767.98px) {
+  .modal .modal-dialog,
+  .modal .modal-dialog-centered {
+    @apply absolute inset-x-0 bottom-0 m-0 w-full max-w-full;
+    min-height: 0;
+  }
+
+  .modal .modal-dialog-centered::before {
+    display: none;
+  }
+
+  .modal.fade .modal-dialog {
+    @apply translate-y-full;
+  }
+
+  .modal.show .modal-dialog {
+    @apply translate-y-0;
+  }
+
+  .modal .modal-content {
+    @apply relative max-h-[90vh] max-w-full rounded-t-[16px] rounded-b-none border-0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .modal .modal-header {
+    @apply relative cursor-grab pt-[20px];
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  html.modal-sheet-dragging,
+  html.modal-sheet-dragging body {
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .modal .modal-header::before {
+    content: '';
+    @apply absolute left-1/2 top-[8px] h-[4px] w-[40px] -translate-x-1/2 rounded-full bg-[#9ca3af];
+  }
+
+  .modal .modal-body,
+  .modal .modal-dialog-scrollable .modal-body {
+    @apply overflow-y-auto;
+  }
+
+  .modal .modal-footer {
+    @apply rounded-b-none;
+  }
+}
+
 /* 3.9 Nav */
 .nav-tabs .nav-item .nav-link {
   @apply text-[#6777ef];

@@ -142,6 +142,27 @@ The user wants the badge style to be "soft" (light tinted background + matching 
 
 **Verification (computed styles on `bootstrap-badge.html` / `bootstrap-table.html`):** all badge variants resolve to soft bg/text/border (e.g. primary `rgb(234,236,254)` / `rgb(77,92,224)` / `rgb(215,219,252)`); table header `bg rgb(248,250,252)`, `color rgb(100,116,139)`, `text-transform: uppercase`, `font-weight 600`; body text `rgb(51,65,85)`. `node audit-classes.js`: `USED in HTML & MISSING: 0`.
 
+### Issue 10: Modal → Bottom Sheet on Mobile (User Design Override)
+**The Request (Sept 28, 2026):**
+On mobile (< 768px), all Bootstrap modals should look like Flutter's `showModalBottomSheet`: slide up from the bottom, full width, rounded top corners, and a drag handle at the top.
+
+**The Fix (all in `assets/css/style-tailwind.css`, section `/* 3.8b */`):** a single `@media (max-width: 767.98px)` block:
+- `.modal .modal-dialog` / `.modal-dialog-centered` → `position: absolute; inset-x 0; bottom 0; margin 0; width 100%; max-width 100%`.
+- `.modal.fade .modal-dialog` → `translate-y-full`; `.modal.show .modal-dialog` → `translate-y-0` (slide-up using Tailwind v4 `translate`).
+- `.modal .modal-content` → `max-height 90vh`, `border-radius: 16px 16px 0 0`, no border, `padding-bottom: env(safe-area-inset-bottom)`.
+- `.modal .modal-header` → `position: relative; padding-top: 20px; cursor: grab; touch-action: none; user-select: none`; `.modal-header::before` renders the drag handle (`40x4px`, rounded, `#9ca3af`, centered).
+- `.modal-body` → `overflow-y: auto`.
+- Recompiled `assets/css/style-tailwind.compiled.css`.
+
+**Drag-to-dismiss (`assets/js/custom.js`):** the handle is interactive. `custom.js` adds delegated `pointerdown/move/up` listeners on `document` (vanilla, no dependency beyond optional jQuery for the final `hide`). Dragging down on `.modal-header` translates the `.modal-dialog` inline (`style.translate`), rubber-bands when pulled up (`dy * 0.2`), and on release either snaps back or dismisses when `dy > max(80px, 25% of sheet height)`. Dismissal animates the sheet down then calls `jQuery(modal).modal("hide")` (fallback: remove `.show`). It is a no-op on desktop (guarded by `matchMedia("(max-width: 767.98px)")`).
+
+**Gotchas:**
+- Do **not** use `.modal.show { display:flex; align-items:flex-end }` to bottom-align: Bootstrap's JS sets inline `display:block` on the `.modal` element when opening, which beats any stylesheet rule. Position the `.modal-dialog` absolutely instead.
+- Selectors are scoped under `.modal` (e.g. `.modal .modal-dialog`, not `.modal-dialog`) because `pages/bootstrap-modal.html` and others embed **static** `.modal-dialog` previews outside an actual `.modal`. Un-scoped rules would hijack those previews on mobile.
+- The header needs `touch-action: none` (and `user-select: none`); otherwise the browser treats a touch drag as a scroll and fires `pointercancel`, so the sheet never moves.
+
+**Verification:** Headless Chrome (500px-wide viewport, `< 768px`): `.modal-dialog` computes `position: absolute`, `rect.bottom === innerHeight` (pinned to bottom), `.modal-content` top radius `16px` / bottom `0`, `max-height 90vh`; `::before` handle `40x4px` `rgb(156,163,175)`; static `.modal-dialog` preview stays `position: relative`. Synthetic `PointerEvent` drag on `.modal-header`: a 30px pull updates `style.translate` then snaps back to `""` with modal still shown; a 300px pull dismisses (`stillShown=false`). Desktop (1200px): unchanged (relative dialog, `max-width 500px`, radius `4.8px`, no handle; drag disabled). `node audit-classes.js`: `USED in HTML & MISSING: 0`.
+
 ## 5. Guide for Future AI / Development
 - **Do not edit `.compiled.css` files directly.** They will be overwritten.
 - **Edit the intermediate files** (`style-tailwind.css`, `components-tailwind.css`) or the generator scripts (`generate-*.js`).
