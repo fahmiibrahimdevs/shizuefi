@@ -1162,6 +1162,10 @@ h6 .badge {
   @apply flex;
 }
 
+.navbar.navbar-expand-lg.main-navbar {
+        @apply !px-0 lg:!px-5;
+    }
+
 @media (max-width: 575.98px) {
   body.search-show .navbar .form-inline .search-element {
     @apply block;
@@ -1687,7 +1691,7 @@ pre {
 
 /* 4.2 Section */
 .section {
-  @apply relative z-[1];
+  @apply relative z-[1] pr-[15px] lg:pr-0;
 }
 .section > *:first-child {
   @apply -mt-[7px];
@@ -1730,9 +1734,23 @@ pre {
   @apply ml-[45px];
 }
 
+#app > div > div.main-content > section > div.section-body {
+  @apply mr-[-15px] lg:mr-0;
+}
+
+/* .section > .section-header {
+  @apply !px-5 lg:!px-9;
+} */
+
+
 .main-wrapper-1 .section .section-header {
   @apply -mx-[30px] -mt-[10px] rounded-none border-t border-solid border-[#f9f9f9] px-[35px];
 }
+
+
+/* .navbar.navbar-expand-lg.main-navbar {
+        @apply !px-0 lg:!px-5;
+    } */
 
 @media (max-width: 575.98px) {
   .section .section-title {
@@ -2157,7 +2175,7 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     @apply w-full p-0 block;
   }
   .main-content {
-    @apply px-[30px] !w-full;
+    @apply px-[15px] !w-full;
   }
   .main-footer {
     @apply pl-[30px];
