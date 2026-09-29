@@ -27,12 +27,12 @@ div.dataTables_wrapper div.dataTables_processing {
 .daterangepicker .input-mini { @apply !pl-[28px]; }
 .daterangepicker .calendar th, .daterangepicker .calendar td { @apply p-[5px] text-[12px]; }
 
-.ranges li { @apply text-[#6777ef]; }
-.ranges li:hover, .ranges li.active { @apply bg-[#6777ef]; }
-.daterangepicker td.active, .daterangepicker td.active:hover { @apply bg-[#6777ef]; }
+.ranges li { @apply text-[#0b52aa]; }
+.ranges li:hover, .ranges li.active { @apply bg-[#0b52aa]; }
+.daterangepicker td.active, .daterangepicker td.active:hover { @apply bg-[#0b52aa]; }
 
 /* 1.10 Dropzone */
-.dropzone { @apply border-2 border-dashed border-[#6777ef] min-h-[240px] text-center; }
+.dropzone { @apply border-2 border-dashed border-[#0b52aa] min-h-[240px] text-center; }
 .dropzone .dz-message { @apply text-[24px] text-[#34395e] m-[3.4em]; }
 .dropzone .dz-preview .dz-details { @apply py-[2.2em] px-[1em]; }
 .dropzone .dz-preview .dz-image { @apply rounded-[3px]; }

@@ -25,10 +25,10 @@ let css = `
 .selectgroup-item:not(:first-child) .selectgroup-button { @apply rounded-l-none; }
 .selectgroup-item:not(:last-child) .selectgroup-button { @apply rounded-r-none; }
 .selectgroup-input { @apply opacity-0 absolute -z-[1] top-0 left-0; }
-.selectgroup-button { @apply bg-[#fdfdff] border border-[#e4e6fc] block text-center px-[1rem] h-[35px] relative cursor-pointer rounded-[3px] select-none text-[13px] min-w-[2.375rem] leading-[36px]; }
+.selectgroup-button { @apply bg-[#fdfdff] border border-[#d3e0f0] block text-center px-[1rem] h-[35px] relative cursor-pointer rounded-[3px] select-none text-[13px] min-w-[2.375rem] leading-[36px]; }
 .selectgroup-button-icon { @apply px-[.5rem]; }
 .selectgroup-button-icon i { @apply text-[14px]; }
-.selectgroup-input:checked + .selectgroup-button { @apply bg-[#6777ef] text-white z-[1]; }
+.selectgroup-input:checked + .selectgroup-button { @apply bg-[#0b52aa] text-white z-[1]; }
 .selectgroup-pills { @apply block flex-wrap items-start; }
 .selectgroup-pills .selectgroup-item { @apply mr-[.5rem] grow-0; }
 .selectgroup-pills .selectgroup-button { @apply !rounded-[50px]; }
@@ -40,19 +40,19 @@ let css = `
 .custom-switches-stacked .custom-switch { @apply mb-[.5rem]; }
 .custom-switch-indicator { @apply inline-block h-[1.25rem] w-[2.25rem] bg-[#e9ecef] rounded-[50px] relative align-bottom border border-[rgba(0,40,100,0.12)]; transition: .3s border-color, .3s background-color; }
 .custom-switch-indicator:before { content: ''; position: absolute; height: calc(1.25rem - 4px); width: calc(1.25rem - 4px); top: 1px; left: 1px; background: #fff; border-radius: 50%; transition: .3s left; }
-.custom-switch-input:checked ~ .custom-switch-indicator { @apply bg-[#6777ef]; }
+.custom-switch-input:checked ~ .custom-switch-indicator { @apply bg-[#0b52aa]; }
 .custom-switch-input:checked ~ .custom-switch-indicator:before { left: calc(1rem + 1px); }
-.custom-switch-input:focus ~ .custom-switch-indicator { @apply border-[#6777ef]; }
+.custom-switch-input:focus ~ .custom-switch-indicator { @apply border-[#0b52aa]; }
 .custom-switch-description { @apply ml-[.5rem] text-[#6e7687]; transition: .3s color; }
 .custom-switch-input:checked ~ .custom-switch-description { @apply text-[#495057]; }
 
 /* 3.2 Image Check */
 .imagecheck { @apply m-0 relative cursor-pointer; }
 .imagecheck-input { @apply absolute -z-[1] opacity-0; }
-.imagecheck-figure { @apply bg-[#fdfdff] border border-[#e4e6fc] rounded-[3px] m-0 relative; }
-.imagecheck-input:focus ~ .imagecheck-figure { @apply border-[#6777ef]; }
+.imagecheck-figure { @apply bg-[#fdfdff] border border-[#d3e0f0] rounded-[3px] m-0 relative; }
+.imagecheck-input:focus ~ .imagecheck-figure { @apply border-[#0b52aa]; }
 .imagecheck-input:checked ~ .imagecheck-figure { @apply border-[rgba(0,40,100,0.24)]; }
-.imagecheck-figure:before { content: ''; position: absolute; top: .25rem; left: .25rem; display: block; width: 1rem; height: 1rem; pointer-events: none; user-select: none; background: #6777ef ${checkSvg}; color: #fff; z-index: 1; border-radius: 3px; opacity: 0; transition: .3s opacity; }
+.imagecheck-figure:before { content: ''; position: absolute; top: .25rem; left: .25rem; display: block; width: 1rem; height: 1rem; pointer-events: none; user-select: none; background: #0b52aa ${checkSvg}; color: #fff; z-index: 1; border-radius: 3px; opacity: 0; transition: .3s opacity; }
 .imagecheck-input:checked ~ .imagecheck-figure:before { @apply opacity-100; }
 .imagecheck-image { @apply max-w-full opacity-[.64]; transition: .3s opacity; }
 .imagecheck-image:first-child { @apply rounded-t-[2px]; }
@@ -66,7 +66,7 @@ let css = `
 /* 3.2 Color Input */
 .colorinput { @apply m-0 relative cursor-pointer; }
 .colorinput-input { @apply absolute -z-[1] opacity-0; }
-.colorinput-color { @apply bg-[#fdfdff] border border-[#e4e6fc] inline-block w-[1.75rem] h-[1.75rem] rounded-[3px] text-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]; }
+.colorinput-color { @apply bg-[#fdfdff] border border-[#d3e0f0] inline-block w-[1.75rem] h-[1.75rem] rounded-[3px] text-white shadow-[0_1px_2px_0_rgba(0,0,0,0.05)]; }
 .colorinput-color:before { content: ''; opacity: 0; position: absolute; top: .25rem; left: .25rem; height: 1.25rem; width: 1.25rem; transition: .3s opacity; background: ${checkSvg}; }
 .colorinput-input:checked ~ .colorinput-color:before { @apply opacity-100; }
 
@@ -89,7 +89,7 @@ let css = `
 .card .card-header h4 + .card-header-form .input-group .input-group-btn .btn { @apply mt-[-1px] !rounded-l-[30px] !rounded-r-none; }
 
 /* 3.5 Card Hero */
-.card.card-hero .card-header { @apply p-[40px] text-white overflow-hidden h-auto block; min-height: auto; background-image: linear-gradient(to bottom, #6777ef, #95a0f4); }
+.card.card-hero .card-header { @apply p-[40px] text-white overflow-hidden h-auto block; min-height: auto; background-image: linear-gradient(to bottom, #0b52aa, #5486c4); }
 .card.card-hero .card-header h4 { @apply text-[40px] leading-none text-white; }
 .card.card-hero .card-header .card-description { @apply mt-[5px] text-[16px]; }
 .card.card-hero .card-header .card-icon { @apply float-right text-[#8c98f3] -m-[60px]; }

@@ -175,6 +175,18 @@ On narrow screens the section-header breadcrumb (`.section-header-breadcrumb`, u
 
 **Verification (headless Chrome, harness with 4 items incl. a long label):** at 500px the breadcrumb is a single 18px line with `scrollWidth === clientWidth` (no overflow); first item `62px` and last item `236px` unchanged, middle item truncated (`152px → 76px`). At 1200px all items keep their full widths. `node audit-classes.js`: `USED in HTML & MISSING: 0`.
 
+### Issue 13: Primary Color Rebrand to `#0b52aa` (User Request)
+**The Request (Sept 28, 2026):**
+Change every primary color to `#0b52aa`. The **soft badges stay untouched** (they already look good).
+
+**The Fix:** global exact-string replacements across the CSS sources **and** their generators (so regeneration does not revert them): `assets/css/style-tailwind.css`, `assets/css/components-tailwind.css`, `assets/css/bootstrap-tailwind.css`, `generate-bs-tw.js`, `generate-components2.js`, `generate-components3.js`, `generate-stisla-missing.js`. Then `node generate-bs-tw.js` (bootstrap shim is generator-owned) and recompiled all three `*-tailwind.compiled.css`.
+- Primary + Bootstrap primary: `#6777ef`, `#007bff` → `#0b52aa`.
+- Alpha variants `rgba(103,119,239,α)` / `rgba(0,123,255,α)` → `rgba(11,82,170,α)`.
+- Derived shades (kept proportional so shadows/hovers/tints stay consistent): `#394eea` (hover) → `#094185`; `#acb5f6` (shadow tint) → `#79a0d0`; `#95a0f4` (medium tint / card-hero gradient) → `#5486c4`; `#e4e6fc` (very-light tint) → `#d3e0f0`; `#80bdff` → `#85a9d5`; `#b3d7ff` → `#b6cbe6`. `--primary` variable updated too.
+- **Not changed:** soft badge palette (`.badge.badge-primary` = `#eff6ff` / `#1d4ed8` / `#bfdbfe`, and every other `.badge.badge-*`).
+
+**Verification (headless Chrome computed styles):** `.text-primary`, `.bg-primary`, `.btn-primary`, `.btn-outline-primary` (text+border), `.progress-bar`, `.pricing-highlight .pricing-title`, `.alert-primary` all resolve to `rgb(11,82,170)`. Soft badge unchanged: `bg rgb(239,246,255) / text rgb(29,78,216) / border rgb(191,219,254)`; `.badge-success` unchanged. `grep` of the compiled outputs: **0** remaining old primary hexes. `node audit-classes.js`: `USED in HTML & MISSING: 0`.
+
 ## 5. Guide for Future AI / Development
 - **Do not edit `.compiled.css` files directly.** They will be overwritten.
 - **Edit the intermediate files** (`style-tailwind.css`, `components-tailwind.css`) or the generator scripts (`generate-*.js`).
